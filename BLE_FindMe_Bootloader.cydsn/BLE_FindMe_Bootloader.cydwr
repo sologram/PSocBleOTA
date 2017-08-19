@@ -29,8 +29,8 @@
       <Data key="86400817-8845-44a3-994f-b402a9ecd7bd" value="Advertising_LED" />
       <Data key="c8b14503-611e-4c93-9dce-3a4c1f060fd6" value="Bootloader_Service_Activation" />
       <Data key="d0fe4d41-17bb-4a1b-8e56-fab43dac192b" value="CapsLock_LED" />
-      <Data key="d705aeb9-258f-430b-ae5b-ef2b8547e6d1" value="Advertising_LED_1" />
-      <Data key="e11c698f-d84f-48c8-b726-30974d8e2bec/52f31aa9-2f0a-497d-9a1f-1424095e13e6" value="UART_Tx" />
+      <Data key="d705aeb9-258f-430b-ae5b-ef2b8547e6d1" value="Advertising_LED" />
+      <Data key="e11c698f-d84f-48c8-b726-30974d8e2bec/52f31aa9-2f0a-497d-9a1f-1424095e13e6" value="UART_tx" />
       <Data key="eb5d0adc-3d02-4fe8-a893-c300092c2093" value="BasNotifLed" />
       <Data key="f7ada96e-72d4-4d9e-94e4-5f99f39b24de" value="Bootloading_LED" />
     </Group>
@@ -3798,7 +3798,7 @@
     </Group>
     <Group key="d705aeb9-258f-430b-ae5b-ef2b8547e6d1">
       <Group key="0">
-        <Data key="Port Format" value="3,6" />
+        <Data key="Port Format" value="2,6" />
       </Group>
     </Group>
     <Group key="e11c698f-d84f-48c8-b726-30974d8e2bec/52f31aa9-2f0a-497d-9a1f-1424095e13e6">

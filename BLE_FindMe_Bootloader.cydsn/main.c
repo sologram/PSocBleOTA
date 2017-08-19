@@ -54,7 +54,7 @@ static void LowPowerImplementation(void);
 *******************************************************************************/
 int main()
 {
-    const char8 serialNumber[] = "123456";
+    //const char8 serialNumber[] = "123456";
     
 #if defined(__ARMCC_VERSION)    
     keep_me = Image$$DATA$$ZI$$Limit;
@@ -75,21 +75,21 @@ int main()
 
     CyGlobalIntEnable;
 
-    Bootloading_LED_Write(LED_OFF);
-    Advertising_LED_1_Write(LED_OFF);
-    Advertising_LED_2_Write(LED_OFF);
+    //Bootloading_LED_Write(LED_OFF);
+    Advertising_LED_Write(LED_OFF);
+    //Advertising_LED_2_Write(LED_OFF);
 
     
     CyBle_Start(AppCallBack);
     CyBle_GattsEnableAttribute(cyBle_btss.btServiceHandle); /* fix CDT 243443, enabling Bootloader service */
     
     /* Set Serial Number string not initialized in GUI */
-    CyBle_DissSetCharacteristicValue(CYBLE_DIS_SERIAL_NUMBER, sizeof(serialNumber), (uint8 *)serialNumber);
+    //CyBle_DissSetCharacteristicValue(CYBLE_DIS_SERIAL_NUMBER, sizeof(serialNumber), (uint8 *)serialNumber);
 
-    CyBle_GattsDisableAttribute(cyBle_hidss[0].serviceHandle);
-    CyBle_GattsDisableAttribute(cyBle_diss.serviceHandle);
-    CyBle_GattsDisableAttribute(cyBle_bass[0].serviceHandle);
-    CyBle_GattsDisableAttribute(cyBle_scpss.serviceHandle);
+    //CyBle_GattsDisableAttribute(cyBle_hidss[0].serviceHandle);
+    //CyBle_GattsDisableAttribute(cyBle_diss.serviceHandle);
+    //CyBle_GattsDisableAttribute(cyBle_bass[0].serviceHandle);
+    //CyBle_GattsDisableAttribute(cyBle_scpss.serviceHandle);
 
     /* Force client to rediscover services in range of bootloader service */
     WriteAttrServChanged();
@@ -142,6 +142,7 @@ void AppCallBack(uint32 event, void* eventParam)
             if(apiResult != CYBLE_ERROR_OK)
             {
             }
+            Advertising_LED_Write(LED_ON);
             break;
         case CYBLE_EVT_HARDWARE_ERROR:    /* This event indicates that some internal HW error has occurred. */
             DBG_PRINTF("CYBLE_EVT_HARDWARE_ERROR\r\n");
@@ -185,7 +186,7 @@ void AppCallBack(uint32 event, void* eventParam)
                 apiResult = CyBle_L2capLeConnectionParamUpdateRequest(cyBle_connHandle.bdHandle, &connUpdateParam);
                 DBG_PRINTF("CyBle_L2capLeConnectionParamUpdateRequest API: 0x%2.2x \r\n", apiResult);
             }
-            Bootloading_LED_Write(LED_OFF);
+            //Bootloading_LED_Write(LED_OFF);
             break;
         case CYBLE_EVT_GAP_DEVICE_DISCONNECTED:
             DBG_PRINTF("CYBLE_EVT_GAP_DEVICE_DISCONNECTED\r\n");
@@ -194,6 +195,7 @@ void AppCallBack(uint32 event, void* eventParam)
             {
                 DBG_PRINTF("StartAdvertisement API Error: %d \r\n", apiResult);
             }
+            Advertising_LED_Write(LED_ON);
             break;
         case CYBLE_EVT_GAP_ENCRYPT_CHANGE:
             DBG_PRINTF("CYBLE_EVT_GAP_ENCRYPT_CHANGE: %x \r\n", *(uint8 *)eventParam);
@@ -208,13 +210,13 @@ void AppCallBack(uint32 event, void* eventParam)
                  * mode (Hibernate mode) and wait for an external
                  * user event to wake up the device again */
                 DBG_PRINTF("Entering low power mode...\r\n");
-                Bootloading_LED_Write(LED_ON);
-                Advertising_LED_1_Write(LED_ON);
-                Advertising_LED_2_Write(LED_ON);
-                Bootloader_Service_Activation_ClearInterrupt();
-                Wakeup_Interrupt_ClearPending();
-                Wakeup_Interrupt_Start();
-                CySysPmHibernate();
+                //Bootloading_LED_Write(LED_ON);
+                Advertising_LED_Write(LED_OFF);
+                //Advertising_LED_2_Write(LED_ON);
+                //Bootloader_Service_Activation_ClearInterrupt();
+                //Wakeup_Interrupt_ClearPending();
+                //Wakeup_Interrupt_Start();
+                //CySysPmHibernate();
             }
             break;
 

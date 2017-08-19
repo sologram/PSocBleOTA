@@ -35,7 +35,7 @@ void WDT_Start(void)
     /* Unlock the WDT registers for modification */
     CySysWdtUnlock(); 
     /* Setup ISR */
-    WDT_Interrupt_StartEx(&Timer_Interrupt);
+    //WDT_Interrupt_StartEx(&Timer_Interrupt);
     /* Write the mode to generate interrupt on match */
     CySysWdtWriteMode(WDT_COUNTER, CY_SYS_WDT_MODE_INT);
     /* Configure the WDT counter clear on a match setting */
@@ -117,13 +117,13 @@ void HandleLeds(void)
         {
             ledTimer = LED_TIMEOUT;
             advLed ^= LED_OFF;
-            Bootloading_LED_Write(advLed);
+            //Bootloading_LED_Write(advLed);
             CyDelay(1u);
         }
     }
     else
     {
-        Bootloading_LED_Write(LED_ON);
+        //Bootloading_LED_Write(LED_ON);
     }
 }
 
