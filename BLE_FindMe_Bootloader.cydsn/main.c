@@ -36,6 +36,18 @@ CYBLE_CONN_HANDLE_T connHandle;
 #endif /* defined(__ARMCC_VERSION) */
 static void LowPowerImplementation(void);
 
+uint8 alertLevel = 0;
+
+void IasEventHandler(uint32 event, void *eventParam)
+{
+    /* Alert Level Characteristic write event */
+    if(event == CYBLE_EVT_IASS_WRITE_CHAR_CMD)
+    {
+        /* Read the updated Alert Level value from the GATT database */
+        CyBle_IassGetCharacteristicValue(CYBLE_IAS_ALERT_LEVEL, 
+            sizeof(alertLevel), &alertLevel);
+    }
+}
 
 /*******************************************************************************
 * Function Name: main
@@ -95,7 +107,8 @@ int main()
     WriteAttrServChanged();
     
     WDT_Start();
-
+    CyBle_IasRegisterAttrCallback(IasEventHandler);
+	
     while(1u == 1u)
     {
         /* CyBle_ProcessEvents() allows BLE stack to process pending events */

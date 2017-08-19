@@ -13,6 +13,7 @@
 
 #include <project.h>
 #include "ias.h"
+#include "common.h"
 
 /* IAS alert level value */
 uint8 alertLevel = 0;

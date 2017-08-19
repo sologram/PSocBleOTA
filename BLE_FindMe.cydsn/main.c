@@ -33,7 +33,7 @@
 #include <project.h>
 #include "ias.h"
 #include "common.h"
-
+#include "ota_optional.h"
 
 /*******************************************************************************
 * Function Name: StackEventHandler
@@ -69,7 +69,7 @@ void StackEventHandler(uint32 event, void *eventParam)
         case CYBLE_EVT_GAP_DEVICE_CONNECTED:
             /* BLE link is established */
             Advertising_LED_Write(LED_OFF);
-            Disconnect_LED_Write(LED_OFF);
+            //Disconnect_LED_Write(LED_OFF);
             break;
 
         case CYBLE_EVT_GAPP_ADVERTISEMENT_START_STOP:
@@ -79,7 +79,7 @@ void StackEventHandler(uint32 event, void *eventParam)
                  * mode (Stop mode) and wait for device reset
                  * event to wake up the device again */
                 Advertising_LED_Write(LED_OFF);
-                Disconnect_LED_Write(LED_ON);
+                //Disconnect_LED_Write(LED_ON);
                 CySysPmSetWakeupPolarity(CY_PM_STOP_WAKEUP_ACTIVE_HIGH);
                 CySysPmStop();
                
@@ -170,6 +170,9 @@ int main()
 
     CyGlobalIntEnable;
 
+#if !defined(__ARMCC_VERSION)
+    InitializeBootloaderSRAM();
+#endif
     apiResult = CyBle_Start(StackEventHandler);
 
     if(apiResult != CYBLE_ERROR_OK)
@@ -178,6 +181,8 @@ int main()
         CYASSERT(0);
     }
 
+	PrintProjectHeader();
+	ConfigureSharedPins();
     CyBle_IasRegisterAttrCallback(IasEventHandler);
 
     for(;;)
@@ -189,7 +194,6 @@ int main()
         /* Single API call to service all the BLE stack events. Must be
          * called at least once in a BLE connection interval */
         CyBle_ProcessEvents();
-        
         /* Update Alert Level value on the blue LED */
         switch(alertLevel)
         {
@@ -208,7 +212,8 @@ int main()
             break;
 
             case HIGH_ALERT:
-            Alert_LED_Write(LED_ON);
+            //Alert_LED_Write(LED_ON);
+	        BootloaderSwitch();
             break;
         }
 

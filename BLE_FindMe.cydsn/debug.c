@@ -140,9 +140,9 @@ void Set32ByPtr(uint8 ptr[], uint32 value)
 *******************************************************************************/
 void ShowError(void)
 {
-    Disconnect_LED_Write(LED_ON);
+    //Disconnect_LED_Write(LED_ON);
     Advertising_LED_Write(LED_ON);
-    CapsLock_LED_Write(LED_ON);
+    //CapsLock_LED_Write(LED_ON);
     /* Halt CPU in Debug mode */
     CYASSERT(0u != 0u);
 }

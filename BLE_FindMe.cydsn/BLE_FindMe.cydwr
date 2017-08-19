@@ -34,6 +34,7 @@
       <Data key="c8b14503-611e-4c93-9dce-3a4c1f060fd6" value="Wakeup_SW" />
       <Data key="d3ccf0e0-9ec5-4c0f-a8b3-b0665342f4e7" value="Hibernate_LED" />
       <Data key="d705aeb9-258f-430b-ae5b-ef2b8547e6d1" value="Advertising_LED" />
+      <Data key="e11c698f-d84f-48c8-b726-30974d8e2bec/52f31aa9-2f0a-497d-9a1f-1424095e13e6" value="UART_tx" />
       <Data key="ec74dd27-8fe2-44f1-814a-6af2de0a7c97" value="DebugLedBlessInt" />
     </Group>
   </Group>
@@ -3746,6 +3747,11 @@
     <Group key="d705aeb9-258f-430b-ae5b-ef2b8547e6d1">
       <Group key="0">
         <Data key="Port Format" value="3,6" />
+      </Group>
+    </Group>
+    <Group key="e11c698f-d84f-48c8-b726-30974d8e2bec/52f31aa9-2f0a-497d-9a1f-1424095e13e6">
+      <Group key="0">
+        <Data key="Port Format" value="1,5" />
       </Group>
     </Group>
     <Group key="ec74dd27-8fe2-44f1-814a-6af2de0a7c97">
